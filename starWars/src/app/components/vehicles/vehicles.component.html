@@ -1,1 +1,27 @@
-<p>vehicles works!</p>
+<div class="text-center pt-5">
+  <img
+    src="https://1000marcas.net/wp-content/uploads/2019/12/logo-StarWars.png"
+    alt="Star Wars Logo"
+    class="w-25 mb-5"
+  />
+</div>
+<!--AQUI ME FALTA UN NAV QUE MANDE AL HOME Y PUEDA PASAR ENTRE PÁGINAS (EJEMPLO EN 7 MIGUEL)-->
+
+<div class="container">
+  <div class="row justify-content-center">
+    <mat-card
+      class="example-card col-2 m-3" *ngFor="let vehicle of vehicleList">
+      <img mat-card-image [src]="getPhotoUrl(vehicle)" alt="Foto personaje" />
+      <mat-card-content>
+        <p class="text-center">
+          {{ vehicle.name }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="text-center">
+          <button mat-button class="btn btn-primary">INFO</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

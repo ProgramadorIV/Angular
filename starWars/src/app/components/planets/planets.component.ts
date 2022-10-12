@@ -22,7 +22,7 @@ export class PlanetsComponent implements OnInit {
   getPlanetPage(id: number){
 
     this.planetService.getPlanets(id).subscribe(resp => {
-      this.planetList = resp.url;
+      this.planetList = resp.results;
       this.pages = Math.ceil(resp.count / 10);
     });
   }
