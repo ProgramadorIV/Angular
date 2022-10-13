@@ -11,7 +11,9 @@
   <div class="row justify-content-center">
     <mat-card
       class="example-card col-2 m-3" *ngFor="let starship of starshipList">
-      <img mat-card-image [src]="getPhotoUrl(starship)" alt="Foto personaje" />
+      <img mat-card-image [src]="getPhotoUrl(starship)"
+      onerror="this.onerror = null; this.src = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png' "
+      alt="Foto personaje" />
       <mat-card-content>
         <p class="text-center">
           {{ starship.name }}

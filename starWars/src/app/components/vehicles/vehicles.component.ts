@@ -31,6 +31,10 @@ export class VehiclesComponent implements OnInit {
     return `https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`
   }
 
+  errorPhoto(){
+    return 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'
+  }
+
   counter(){
     return new Array(this.pages);
   }

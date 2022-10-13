@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from 'src/app/interfaces/characters';
+import { Test } from 'src/app/interfaces/test';
 import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
@@ -26,11 +27,32 @@ export class CharactersComponent implements OnInit {
     });
   }
 
+  isUrlValid(str: string){
+    let url;
+
+    try {
+      url = new URL(str)
+      return true;
+    }
+    catch(_){
+      return false;
+    }
+
+  }
+
   getPhotoUrl(character: Character){
 
     let id = character.url.split('/').reverse()[1];
-    return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`
+    let link = `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
+
+    return link;
+
   }
+
+  errorPhoto(){
+    return 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png';
+  }
+
 
   counter(){
     return new Array(this.pages);
