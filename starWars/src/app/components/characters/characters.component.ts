@@ -27,19 +27,6 @@ export class CharactersComponent implements OnInit {
     });
   }
 
-  isUrlValid(str: string){
-    let url;
-
-    try {
-      url = new URL(str)
-      return true;
-    }
-    catch(_){
-      return false;
-    }
-
-  }
-
   getPhotoUrl(character: Character){
 
     let id = character.url.split('/').reverse()[1];
