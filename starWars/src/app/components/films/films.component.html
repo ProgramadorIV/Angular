@@ -5,7 +5,10 @@
     class="w-25 mb-5"
   />
 </div>
-<!--AQUI ME FALTA UN NAV QUE MANDE AL HOME Y PUEDA PASAR ENTRE PÁGINAS (EJEMPLO EN 7 MIGUEL)-->
+
+<div class="text-center">
+  <span *ngFor="let in of counter() ;let i = index"><button (click)="getFilmPage(i+1)">{{i+1}}</button>&nbsp;</span>
+</div>
 
 <div class="container">
   <div class="row justify-content-center">

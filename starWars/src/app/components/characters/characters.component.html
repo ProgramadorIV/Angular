@@ -5,9 +5,11 @@
     class="w-25 mb-5"
   />
 </div>
-<!--AQUI ME FALTA UN NAV QUE MANDE AL HOME Y PUEDA PASAR ENTRE PÁGINAS (EJEMPLO EN 7 MIGUEL)-->
 
 <div class="container">
+  <div class="text-center">
+    <span *ngFor="let in of counter() ;let i = index"><button (click)="getCharacterPage(i+1)">{{i+1}}</button>&nbsp;</span>
+  </div>
   <div class="row justify-content-center">
     <mat-card
       class="example-card col-2 m-3" *ngFor="let character of characterList">

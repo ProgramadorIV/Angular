@@ -15,10 +15,10 @@ export class StarshipsComponent implements OnInit {
   constructor(private starshipService: StarshipsService) { }
 
   ngOnInit(): void {
-    this.getStarships(1);
+    this.getStarshipPage(1);
   }
 
-  getStarships(id: number){
+  getStarshipPage(id: number){
 
     return this.starshipService.getStarships(id).subscribe(resp => {
       this.starshipList = resp.results;
