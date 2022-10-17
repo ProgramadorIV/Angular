@@ -12,9 +12,9 @@ export class PokemonService {
 
   constructor(private http: HttpClient) { }
 
-  public getPokemonList(): Observable<PokemonResponse>{
+  public getPokemonList(limit: number): Observable<PokemonResponse>{
 
-    return this.http.get<PokemonResponse>(`${API_BASE_URL}/pokemon`);
+    return this.http.get<PokemonResponse>(`${API_BASE_URL}/pokemon?limit=${limit}`);
   }
 
   public getPokemonDetails(pokemon: Pokemon): Observable<PokemonResponse>{

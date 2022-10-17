@@ -11,27 +11,24 @@ import { PokemonService } from 'src/app/service/pokemon.service';
 export class DesplegableListComponent implements OnInit {
 
   listadoPokemon: Pokemon[]=[];
-  pokemon: Pokemon | undefined;
-  i = 1;
+  pokemonSelected: Pokemon | undefined;
 
   constructor(private pokemoService: PokemonService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.pokemoService.getPokemonList().subscribe( resp => {
+    this.getPokemons(50);
+  }
+
+  getPokemons(limit: number){
+
+    this.pokemoService.getPokemonList(limit).subscribe(resp =>{
       this.listadoPokemon = resp.results;
-    });
+    })
   }
 
   getPhotoUrl(pokemon: Pokemon){
     let id = pokemon.url.split("/").reverse()[1];
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-  }
-
-  getPokemonInfo(pokemon: Pokemon){
-
-    this.pokemoService.getPokemonDetails(pokemon).subscribe(resp =>{
-      this
-    })
   }
 
 }

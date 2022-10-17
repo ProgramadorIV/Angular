@@ -1,9 +1,10 @@
 
-<form (ngSubmit)="getPokemonInfo()">
-  <select class="form-control">
-    <option value="" selected>Select your pokemon</option>
-    <option *ngFor="let pokemon of listadoPokemon" [value]=""><img [src]="getPhotoUrl(pokemon)" alt="Photo of pokemon"> {{pokemon.name}}</option>
+<form>
+  <select class="form-control" [(ngModel)]="">
+    <option>Select your pokemon</option>
+    <option *ngFor="let pokemon of listadoPokemon" [value]="pokemon"> {{pokemon.name}}</option>
   </select>
-  <a class="btn btn-success" >Submit</a>
 </form>
+
+
 
