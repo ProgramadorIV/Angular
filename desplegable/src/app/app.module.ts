@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImportsMaterialModule } from './imports-material/imports-material.module';
 import { DesplegableListComponent } from './components/desplegable-list/desplegable-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { DesplegableListComponent } from './components/desplegable-list/desplega
     DesplegableListComponent
   ],
   imports: [
+    FormsModule,
     ImportsMaterialModule,
     AppRoutingModule,
     NgbModule

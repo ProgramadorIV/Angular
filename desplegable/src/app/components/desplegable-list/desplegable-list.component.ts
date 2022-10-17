@@ -11,9 +11,13 @@ import { PokemonService } from 'src/app/service/pokemon.service';
 export class DesplegableListComponent implements OnInit {
 
   listadoPokemon: Pokemon[]=[];
-  pokemonSelected: Pokemon | undefined;
+  pokemonSelected: Pokemon = {
+    name: "",
+    url: ""
+  };
 
-  constructor(private pokemoService: PokemonService, public dialog: MatDialog) { }
+
+  constructor(private pokemonService: PokemonService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getPokemons(50);
@@ -21,7 +25,7 @@ export class DesplegableListComponent implements OnInit {
 
   getPokemons(limit: number){
 
-    this.pokemoService.getPokemonList(limit).subscribe(resp =>{
+    this.pokemonService.getPokemonList(limit).subscribe(resp =>{
       this.listadoPokemon = resp.results;
     })
   }

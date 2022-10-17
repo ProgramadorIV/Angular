@@ -1,10 +1,17 @@
 
-<form>
-  <select class="form-control" [(ngModel)]="">
-    <option>Select your pokemon</option>
+
+  <select class="form-control" [(ngModel)]="pokemonSelected">
     <option *ngFor="let pokemon of listadoPokemon" [value]="pokemon"> {{pokemon.name}}</option>
   </select>
-</form>
+
+<mat-card class="example-card col-2 m-3">
+      <img mat-card-image [src]="getPhotoUrl(pokemonSelected)"
+      onerror="this.src = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png' "
+      alt="Foto personaje" />
+      <mat-card-content>
+        {{pokemonSelected.name}}
+      </mat-card-content>
+  </mat-card>
 
 
 
