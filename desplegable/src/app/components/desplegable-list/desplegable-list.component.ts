@@ -12,6 +12,7 @@ export class DesplegableListComponent implements OnInit {
 
   listadoPokemon: Pokemon[]=[];
   pokemon: Pokemon | undefined;
+  i = 1;
 
   constructor(private pokemoService: PokemonService, public dialog: MatDialog) { }
 
@@ -26,5 +27,11 @@ export class DesplegableListComponent implements OnInit {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   }
 
+  getPokemonInfo(pokemon: Pokemon){
+
+    this.pokemoService.getPokemonDetails(pokemon).subscribe(resp =>{
+      this
+    })
+  }
 
 }
