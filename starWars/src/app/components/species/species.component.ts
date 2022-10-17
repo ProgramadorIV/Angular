@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Specie } from 'src/app/interfaces/species';
 import { SpeciesService } from 'src/app/services/species.service';
@@ -25,6 +26,7 @@ export class SpeciesComponent implements OnInit {
       this.pages = Math.ceil(resp.count / 10);
     });
   }
+
 
   getPhotoUrl(specie: Specie){
 
