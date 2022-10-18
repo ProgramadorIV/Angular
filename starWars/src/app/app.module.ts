@@ -10,6 +10,8 @@ import { SpeciesComponent } from './components/species/species.component';
 import { StarshipsComponent } from './components/starships/starships.component';
 import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { PlanetsComponent } from './components/planets/planets.component';
+import { NewPeopleComponent } from './components/new-people/new-people.component';
+import { EditPeopleComponent } from './components/edit-people/edit-people.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { PlanetsComponent } from './components/planets/planets.component';
     SpeciesComponent,
     StarshipsComponent,
     VehiclesComponent,
-    PlanetsComponent
+    PlanetsComponent,
+    NewPeopleComponent,
+    EditPeopleComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title class="text-center">{{data.planetInfo.name}}</h1>
+<div mat-dialog-content class="text-center">
+  <ul>
+    <li>Clima: {{data.planetInfo.climate}}</li>
+    <li>Gravedad: {{data.planetInfo.gravity}}</li>
+    <li>Diámetro: {{data.planetInfo.diameter}}</li>
+    <li>Población: {{data.planetInfo.population}}</li>
+    <li>Superficie de agua: {{data.planetInfo.surface_water}}</li>
+    <li>Período de rotación: {{data.planetInfo.rotation_period}}</li>
+  </ul>
+</div>
+<div mat-dialog-actions class="d-grid text-center" >
+  <button mat-button mat-dialog-close color="prymary" cdkFocusInitial>Ok</button>
+</div>

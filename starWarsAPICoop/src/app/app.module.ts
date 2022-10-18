@@ -1,0 +1,53 @@
+import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ImportsMaterialModule } from './imports-material/imports-material.module';
+import { MenuComponent } from './components/menu/menu.component';
+import { SpeciesComponent } from './components/species/species.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { StarshipsComponent } from './components/starships/starships.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component';
+import { CharactersComponent } from './components/characters/characters.component';
+import { CharactersDialogComponent } from './components/characters/characters-dialog/characters-dialog.component';
+import { SpeciesDialogComponent } from './components/species/species-dialog/species-dialog.component';
+import { StarshipsDialogComponent } from './components/starships/starships-dialog/starships-dialog.component';
+import { VehiclesDialogComponent } from './components/vehicles/vehicles-dialog/vehicles-dialog.component';
+import { FilmsComponent } from './components/films/films.component';
+import { FilmsDialogComponent } from './components/films/films-dialog/films-dialog.component';
+import { PlanetsComponent } from './components/planets/planets.component';
+import { PlanetsDialogComponent } from './components/planets/planets-dialog/planets-dialog.component';
+import { NewPeopleComponent } from './components/new-people/new-people.component';
+import { EditPeopleComponent } from './components/edit-people/edit-people.component';
+import { FormsModule } from '@angular/forms';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    MenuComponent,
+    SpeciesComponent,
+    PageNotFoundComponent,
+    StarshipsComponent,
+    VehiclesComponent,
+    CharactersComponent,
+    CharactersDialogComponent,
+    SpeciesDialogComponent,
+    StarshipsDialogComponent,
+    VehiclesDialogComponent,
+    FilmsComponent,
+    FilmsDialogComponent,
+    PlanetsComponent,
+    PlanetsDialogComponent,
+    NewPeopleComponent,
+    EditPeopleComponent
+  ],
+  imports: [
+    ImportsMaterialModule,
+    AppRoutingModule,
+    FormsModule
+
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
