@@ -1,5 +1,5 @@
 <mat-select class="form-control" [(ngModel)]="pokemonSelected" (selectionChange)="getPhotoUrl()">
-  <mat-option selected>Select your pokemon</mat-option>
+  <mat-option value="" selected>Select your pokemon</mat-option>
   <mat-option *ngFor="let pokemon of listadoPokemon" [value]="pokemon">{{pokemon.name}}</mat-option>
 </mat-select>
 
