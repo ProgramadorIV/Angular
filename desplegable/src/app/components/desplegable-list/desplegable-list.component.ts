@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Pokemon } from 'src/app/interfaces/pokemon';
+import { Pokemon, PokemonResponse } from 'src/app/interfaces/pokemon';
 import { PokemonService } from 'src/app/service/pokemon.service';
 
 @Component({
@@ -11,13 +10,10 @@ import { PokemonService } from 'src/app/service/pokemon.service';
 export class DesplegableListComponent implements OnInit {
 
   listadoPokemon: Pokemon[]=[];
-  pokemonSelected: Pokemon = {
-    name: "",
-    url: ""
-  };
+  pokemonSelected: Pokemon | undefined;
+  pokemonPhotoUrl = '';
 
-
-  constructor(private pokemonService: PokemonService, public dialog: MatDialog) { }
+  constructor(private pokemonService: PokemonService) { }
 
   ngOnInit(): void {
     this.getPokemons(50);
@@ -30,9 +26,9 @@ export class DesplegableListComponent implements OnInit {
     })
   }
 
-  getPhotoUrl(pokemon: Pokemon){
-    let id = pokemon.url.split("/").reverse()[1];
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+  getPhotoUrl(){
+    let id = this.pokemonSelected?.url.split("/").reverse()[1];
+    this.pokemonPhotoUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   }
 
 }

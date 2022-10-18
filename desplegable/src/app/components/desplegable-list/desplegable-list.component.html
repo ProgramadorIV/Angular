@@ -1,17 +1,16 @@
+<mat-select class="form-control" [(ngModel)]="pokemonSelected" (selectionChange)="getPhotoUrl()">
+  <mat-option selected>Select your pokemon</mat-option>
+  <mat-option *ngFor="let pokemon of listadoPokemon" [value]="pokemon">{{pokemon.name}}</mat-option>
+</mat-select>
 
-
-  <select class="form-control" [(ngModel)]="pokemonSelected">
-    <option *ngFor="let pokemon of listadoPokemon" [value]="pokemon"> {{pokemon.name}}</option>
-  </select>
-
-<mat-card class="example-card col-2 m-3">
-      <img mat-card-image [src]="getPhotoUrl(pokemonSelected)"
-      onerror="this.src = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png' "
-      alt="Foto personaje" />
-      <mat-card-content>
-        {{pokemonSelected.name}}
-      </mat-card-content>
-  </mat-card>
-
-
-
+<mat-card class="example-card col-2 m-3" *ngIf="pokemonSelected != undefined">
+  <img
+    mat-card-image
+    [src]="pokemonPhotoUrl"
+    onerror="this.src = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png'"
+    alt="Foto personaje"
+  />
+  <mat-card-content>
+    {{ pokemonSelected.name }}
+  </mat-card-content>
+</mat-card>
