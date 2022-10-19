@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Planet } from 'src/app/interfaces/planets';
+import { PlanetsService } from 'src/app/services/planets.service';
 
 @Component({
   selector: 'app-new-people',
@@ -7,6 +9,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./new-people.component.css']
 })
 export class NewPeopleComponent implements OnInit {
+
+  planetsList: Planet []= [];
+  numPages: number = 6;
 
   chaName: String = '';
   chaHeight: String = '';
@@ -28,13 +33,33 @@ export class NewPeopleComponent implements OnInit {
     homeworldFormControl: new FormControl(this.charHomeworld , Validators.required),
   });
 
-  constructor() { }
+  constructor(private planetService: PlanetsService) { }
 
   ngOnInit(): void {
+    /*this.getPages();*/
+    this.getEachPage(this.numPages);
   }
 
   onSubmit(){
     alert('The new character will be created.');
+  }
+
+  /* getPages(){
+    this.planetService.getAllPlanets().subscribe(resp => {
+      this.numPages = resp.count/10;
+    });
+  } */
+
+  getEachPage(pages: number){
+
+    for (let index = 0; index < pages; index++) {
+      this.planetService.getPlanet(index).subscribe(resp=>{
+
+        resp.results.forEach(planet => {
+          this.planetsList.push(planet);
+        });
+      });
+    }
   }
 
 }

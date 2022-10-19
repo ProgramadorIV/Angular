@@ -10,6 +10,12 @@ import { Planet, PlanetResult } from '../interfaces/planets';
 export class PlanetsService {
   constructor(private http: HttpClient) {}
 
+  getAllPlanets(): Observable<PlanetResult>{
+    return this.http.get<PlanetResult>(
+      `${environment.apiBaseUrl}/planets`
+    );
+  }
+
   getPlanet(page: number): Observable<PlanetResult> {
     return this.http.get<PlanetResult>(
       `${environment.apiBaseUrl}/planets?page=${page}`

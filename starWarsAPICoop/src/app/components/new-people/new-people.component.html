@@ -30,12 +30,17 @@
         <mat-label>Gender</mat-label>
         <mat-select formControlName="genderFormControl">
           <mat-placeholder>Select the gender</mat-placeholder>
-          <mat-option></mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="Non-binary">Non-binary</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Homeworld</mat-label>
-        <input matInput formControlName="homeworldFormControl" />
+        <mat-placeholder>Select character homeworld</mat-placeholder>
+        <mat-select formControlName="homeworldFormControl">
+          <mat-option [value]="planet.name" *ngFor="let planet of planetsList">{{planet.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div class="text-center p-3">
