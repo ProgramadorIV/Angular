@@ -1,0 +1,45 @@
+<div class="container bg-white">
+  <mat-form [formGroup]="newFormGroup" (ngSubmit)="onSubmit()">
+    <legend class="p-3">Select the atributes of the new character</legend>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Name </mat-label>
+        <input matInput formControlName="nameFormControl" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Height (cm)</mat-label>
+        <input matInput formControlName="heightFormControl" type="number"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Mass (kg)</mat-label>
+        <input matInput formControlName="massFormControl" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Hair color</mat-label>
+        <input matInput formControlName="hairColorFormControl" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Skin color</mat-label>
+        <input matInput formControlName="skinColorFormControl" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Birth year</mat-label>
+        <input matInput formControlName="birthYearFormControl" type="date"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="genderFormControl">
+          <mat-placeholder>Select the gender</mat-placeholder>
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Homeworld</mat-label>
+        <input matInput formControlName="homeworldFormControl" />
+      </mat-form-field>
+    </div>
+    <div class="text-center p-3">
+      <a class="btn btn-success px-5 py-3">Create</a>
+    </div>
+  </mat-form>
+</div>

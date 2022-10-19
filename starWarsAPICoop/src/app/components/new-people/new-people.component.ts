@@ -17,7 +17,7 @@ export class NewPeopleComponent implements OnInit {
   charGender: String = '';
   charHomeworld: String = '';
 
-  loginFormGroup = new FormGroup({
+  newFormGroup = new FormGroup({
     nameFormControl: new FormControl(this.chaName, Validators.required),
     heightFormControl: new FormControl(this.chaHeight , Validators.required),
     massFormControl: new FormControl(this.charMass , Validators.required),

@@ -18,7 +18,7 @@ import { PlanetsComponent } from './components/planets/planets.component';
 import { PlanetsDialogComponent } from './components/planets/planets-dialog/planets-dialog.component';
 import { NewPeopleComponent } from './components/new-people/new-people.component';
 import { EditPeopleComponent } from './components/edit-people/edit-people.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -44,7 +44,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     ImportsMaterialModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [],
