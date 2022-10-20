@@ -1,4 +1,4 @@
-<div class="container bg-white">
+<div class="container bg-white mt-5 rounded w-50">
   <mat-form [formGroup]="newFormGroup" (ngSubmit)="onSubmit()">
     <legend class="p-3">Select the atributes of the new character</legend>
     <div class="row">
@@ -37,14 +37,14 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Homeworld</mat-label>
-        <mat-placeholder>Select character homeworld</mat-placeholder>
         <mat-select formControlName="homeworldFormControl">
+          <mat-placeholder>Select character homeworld</mat-placeholder>
           <mat-option [value]="planet.name" *ngFor="let planet of planetsList">{{planet.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div class="text-center p-3">
-      <a class="btn btn-success px-5 py-3">Create</a>
+      <input class="btn btn-success px-5 py-3" type="submit" value="Create" [disabled]="!newFormGroup.valid" />
     </div>
   </mat-form>
 </div>

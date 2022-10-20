@@ -11,7 +11,7 @@ import { PlanetsService } from 'src/app/services/planets.service';
 export class NewPeopleComponent implements OnInit {
 
   planetsList: Planet []= [];
-  numPages: number = 6;
+  numPages: number = 0;
 
   chaName: String = '';
   chaHeight: String = '';
@@ -36,19 +36,20 @@ export class NewPeopleComponent implements OnInit {
   constructor(private planetService: PlanetsService) { }
 
   ngOnInit(): void {
-    /*this.getPages();*/
-    this.getEachPage(this.numPages);
+    this.getPages();
   }
 
   onSubmit(){
     alert('The new character will be created.');
   }
 
-  /* getPages(){
+  getPages(){
     this.planetService.getAllPlanets().subscribe(resp => {
       this.numPages = resp.count/10;
+      this.getEachPage(this.numPages);
     });
-  } */
+
+  }
 
   getEachPage(pages: number){
 
@@ -57,9 +58,15 @@ export class NewPeopleComponent implements OnInit {
 
         resp.results.forEach(planet => {
           this.planetsList.push(planet);
+          this.getSortedList(this.planetsList)
         });
       });
     }
   }
+
+  getSortedList(list: Planet[]){
+    this.planetsList.sort((a,b) => (a.name>b.name ? 1:-1) );
+  }
+
 
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'starships', component: StarshipsComponent},
   {path: 'vehicles', component: VehiclesComponent},
   {path: 'new-character', component: NewPeopleComponent},
-  {path: 'editCharacter', component: EditPeopleComponent},
+  {path: 'edit-character', component: EditPeopleComponent},
   {path: '', redirectTo: '/menu', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent }
 ];
