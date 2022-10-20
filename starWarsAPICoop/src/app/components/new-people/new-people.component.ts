@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Character } from 'src/app/interfaces/characters';
 import { Planet } from 'src/app/interfaces/planets';
 import { PlanetsService } from 'src/app/services/planets.service';
 
@@ -9,6 +10,8 @@ import { PlanetsService } from 'src/app/services/planets.service';
   styleUrls: ['./new-people.component.css']
 })
 export class NewPeopleComponent implements OnInit {
+
+  character: Character | undefined
 
   planetsList: Planet []= [];
   numPages: number = 0;
@@ -40,7 +43,7 @@ export class NewPeopleComponent implements OnInit {
   }
 
   onSubmit(){
-    alert('The new character will be created.');
+    alert('The new character has been created.');
   }
 
   getPages(){
@@ -53,19 +56,18 @@ export class NewPeopleComponent implements OnInit {
 
   getEachPage(pages: number){
 
-    for (let index = 0; index < pages; index++) {
+    for (let index = 1; index <= pages; index++) {
       this.planetService.getPlanet(index).subscribe(resp=>{
 
         resp.results.forEach(planet => {
           this.planetsList.push(planet);
-          this.getSortedList(this.planetsList)
         });
       });
     }
   }
 
   getSortedList(list: Planet[]){
-    this.planetsList.sort((a,b) => (a.name>b.name ? 1:-1) );
+    list.sort((a,b) => (a.name>b.name ? 1:-1) );
   }
 
 
