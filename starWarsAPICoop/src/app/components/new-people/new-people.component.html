@@ -37,7 +37,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Homeworld</mat-label>
-        <mat-select formControlName="homeworldFormControl" (click)="getSortedList(planetsList)">
+        <mat-select formControlName="homeworldFormControl">
           <mat-placeholder>Select character homeworld</mat-placeholder>
           <mat-option [value]="planet.name" *ngFor="let planet of planetsList">{{planet.name}}</mat-option>
         </mat-select>

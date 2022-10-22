@@ -11,8 +11,7 @@ import { PlanetsService } from 'src/app/services/planets.service';
 })
 export class NewPeopleComponent implements OnInit {
 
-  character: Character | undefined
-
+  character: Character | undefined;
   planetsList: Planet []= [];
   numPages: number = 0;
 
@@ -56,12 +55,16 @@ export class NewPeopleComponent implements OnInit {
 
   getEachPage(pages: number){
 
+    let contador = pages;
     for (let index = 1; index <= pages; index++) {
       this.planetService.getPlanet(index).subscribe(resp=>{
 
         resp.results.forEach(planet => {
           this.planetsList.push(planet);
         });
+        if(--contador==0){
+          this.getSortedList(this.planetsList);
+        }
       });
     }
   }
