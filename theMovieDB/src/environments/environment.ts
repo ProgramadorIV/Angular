@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiKey: "f2851eb48fd6914caa01cdfc4d71ec43",
-  apiBaseUrl: "https://api.themoviedb.org/3/"
+  apiBaseUrl: "https://api.themoviedb.org/3",
+  actorImgBaseUrl: "https://www.themoviedb.org/t/p/w300_and_h450_bestv2"
 };
 
 /*

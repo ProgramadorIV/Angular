@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImportsMaterialModule } from './imports-material/imports-material.module';
 import { ActorListComponent } from './components/actor-list/actor-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ActorListComponent } from './components/actor-list/actor-list.component
     AppRoutingModule,
     BrowserAnimationsModule,
     ImportsMaterialModule,
+    HttpClientModule,
     NgbModule
   ],
   providers: [],

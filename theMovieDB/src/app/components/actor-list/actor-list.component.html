@@ -1,1 +1,23 @@
-<p>actor-list works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <mat-card class="example-card col-2 m-3" *ngFor="let actor of actorList">
+      <img
+        mat-card-image
+        [src]="getPhotoUrl(actor.profile_path)"
+        onerror="this.onerror = null; this.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'"
+        alt="Foto personaje"
+        width="50%"
+      />
+      <mat-card-content>
+        <p class="text-center fw-bold" [ngStyle]="{ 'font-family': 'Roboto' }">
+          {{ actor.name }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!--<div class="text-center d-grid">
+        <button (click)="showCharacterInfo(actor)" mat-button class="btn btn-primary" [ngStyle]="{'font-family': 'Roboto'}"> + INFO</button>
+      </div>-->
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
