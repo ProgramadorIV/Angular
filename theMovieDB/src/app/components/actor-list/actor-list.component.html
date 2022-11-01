@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row justify-content-center">
+    <!--<span *ngFor="let in of counter(); let i = index"
+      ><button (click)="getCharacterPage(i + 1)">{{ i + 1 }}</button
+      >&nbsp;</span
+    >-->
     <mat-card class="example-card col-2 m-3" *ngFor="let actor of actorList">
       <img
         mat-card-image
         [src]="getPhotoUrl(actor.profile_path)"
-        onerror="this.onerror = null; this.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'"
+        onerror="this.onerror = null; this.src = 'https://css2.rtve.es/css/rtve.2015.television/rtve.programas/poder-canijo/i/poder-canijo_aux.png'"
         alt="Foto personaje"
         width="50%"
       />
@@ -14,9 +18,9 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <!--<div class="text-center d-grid">
-        <button (click)="showCharacterInfo(actor)" mat-button class="btn btn-primary" [ngStyle]="{'font-family': 'Roboto'}"> + INFO</button>
-      </div>-->
+        <div class="text-center d-grid">
+        <button (click)="openActorDialog(actor)" mat-button class="btn btn-primary" [ngStyle]="{'font-family': 'Roboto'}"> + INFO</button>
+      </div>
       </mat-card-actions>
     </mat-card>
   </div>

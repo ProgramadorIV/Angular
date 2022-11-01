@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>{{actorDetails.name}}</h2>
+  <ul>
+    <li *ngIf="actorDetails.gender == 1 else male">Sex: Female</li>
+    <ng-template #male>
+      <li>Sex: Male</li>
+    </ng-template>
+    <li>Popularity: {{actorDetails.popularity}}</li>
+    <li>Birthday: {{actorDetails.birthday}}</li>
+    <li>Deathday: {{actorDetails.deathday}}</li>
+    <li>Homecity: {{actorDetails.place_of_birth}}</li>
+  </ul>
+</div>

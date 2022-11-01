@@ -8,11 +8,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImportsMaterialModule } from './imports-material/imports-material.module';
 import { ActorListComponent } from './components/actor-list/actor-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ActorDetailsComponent } from './components/actor-list/actor-details/actor-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActorListComponent
+    ActorListComponent,
+    ActorDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -9,12 +9,29 @@ export interface Actor {
   profile_path: string
   adult: boolean
   id: number
-  known_for: KnownFor[]
+  known_for: KnownForFilm[]
   name: string
   popularity: number
 }
 
-export interface KnownFor {
+export interface ActorDetails {
+  birthday: string
+  known_for_department: string
+  deathday: any
+  id: number
+  name: string
+  also_known_as: string[]
+  gender: number
+  biography: string
+  popularity: number
+  place_of_birth: string
+  profile_path: string
+  adult: boolean
+  imdb_id: string
+  homepage: any
+}
+
+export interface KnownForFilm {
   poster_path: string
   adult?: boolean
   overview: string
@@ -34,4 +51,8 @@ export interface KnownFor {
   origin_country?: string[]
   name?: string
   original_name?: string
+}
+
+export interface ActorData {
+  actorId: number;
 }

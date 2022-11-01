@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Actor } from 'src/app/interfaces/actors';
+import { MatDialog } from '@angular/material/dialog';
+import { Actor, ActorDetails } from 'src/app/interfaces/actors';
 import { ActorsService } from 'src/app/services/actors.service';
 import { environment } from 'src/environments/environment';
+import { ActorDetailsComponent } from './actor-details/actor-details.component';
 
 @Component({
   selector: 'app-actor-list',
@@ -14,7 +16,7 @@ export class ActorListComponent implements OnInit {
   actorList: Actor []=[];
   page: string = '1';
 
-  constructor(private actorService: ActorsService) { }
+  constructor(private actorService: ActorsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getActorPage(this.page);
@@ -34,5 +36,16 @@ export class ActorListComponent implements OnInit {
     return `${environment.actorImgBaseUrl}${img}`;
   }
 
+  openActorDialog(actor: Actor){
+
+    let id: number = actor.id
+    this.dialog.open(ActorDetailsComponent, {
+
+      width: '50%',
+      data: {
+        actorId: id
+      }
+    });
+  }
 
 }
