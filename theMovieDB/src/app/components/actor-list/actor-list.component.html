@@ -1,9 +1,11 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <!--<span *ngFor="let in of counter(); let i = index"
-      ><button (click)="getCharacterPage(i + 1)">{{ i + 1 }}</button
-      >&nbsp;</span
-    >-->
+  <div class="row justify-content-center pt-5">
+    <div class="col-12 text-center mb-3 sticky-top bg-white pt-3">
+      <span class="col-2" *ngFor="let in of counter() | paginate: {itemsPerPage: 1, currentPage: page}; let i = index"
+      ><pagination-controls class="text-decoration-none" previousLabel="Prev"
+      nextLabel="Next" (pageChange)="changePage($event)"></pagination-controls></span
+    >
+    </div>
     <mat-card class="example-card col-2 m-3" *ngFor="let actor of actorList">
       <img
         mat-card-image

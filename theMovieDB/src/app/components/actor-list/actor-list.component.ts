@@ -14,7 +14,7 @@ export class ActorListComponent implements OnInit {
 
   totalPages: number = 0;
   actorList: Actor []=[];
-  page: string = '1';
+  page: number = 1;
 
   constructor(private actorService: ActorsService, public dialog: MatDialog) { }
 
@@ -22,7 +22,7 @@ export class ActorListComponent implements OnInit {
     this.getActorPage(this.page);
   }
 
-  getActorPage(page: string){
+  getActorPage(page: number): void{
 
     this.actorService.getActors(page).subscribe(resp =>{
 
@@ -31,7 +31,11 @@ export class ActorListComponent implements OnInit {
     });
   }
 
-  getPhotoUrl(img: string){
+  counter(): Array<Number>{
+    return new Array (this.totalPages);
+  }
+
+  getPhotoUrl(img: string): string{
 
     return `${environment.actorImgBaseUrl}${img}`;
   }
@@ -46,6 +50,11 @@ export class ActorListComponent implements OnInit {
         actorId: id
       }
     });
+  }
+
+  changePage(event: any){
+    this.page = event;
+    this.getActorPage(this.page);
   }
 
 }

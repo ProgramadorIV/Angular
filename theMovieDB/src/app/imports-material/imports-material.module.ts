@@ -37,6 +37,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -44,6 +45,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [],
   imports: [
+    NgxPaginationModule,
     NgbModule,
     CommonModule,
     BrowserModule,
@@ -84,6 +86,7 @@ import { FormsModule } from '@angular/forms';
   ],
 
   exports: [
+    NgxPaginationModule,
     NgbModule,
     CommonModule,
     BrowserModule,
