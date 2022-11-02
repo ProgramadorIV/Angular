@@ -9,12 +9,14 @@ import { ImportsMaterialModule } from './imports-material/imports-material.modul
 import { ActorListComponent } from './components/actor-list/actor-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActorDetailsComponent } from './components/actor-list/actor-details/actor-details.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActorListComponent,
-    ActorDetailsComponent
+    ActorDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActorData, ActorDetails } from 'src/app/interfaces/actors';
+import { ActorData, ActorDetails } from 'src/app/models/interfaces/actors';
 import { ActorsService } from 'src/app/services/actors.service';
 
 @Component({
