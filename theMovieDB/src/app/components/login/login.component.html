@@ -1,1 +1,16 @@
-<p>login works!</p>
+<mat-toolbar style="height: 10%;">
+  <mat-toolbar-row>
+    <div class="col-6 mt-4">
+      <span id="logo"><img src="https://png.pngtree.com/png-vector/20220831/ourmid/pngtree-camera-icon-design-png-image_6133093.png" width="20%">FilmAffinity</span>
+    </div>
+    <div class="col-6 text-end mt-4">
+      <mat-icon (click)="getRequestToken()" *ngIf="!isApproved" class="example-icon" aria-hidden="false"
+      aria-label="Example heart icon">person
+    </mat-icon>
+    <mat-icon (click)="logOut()" *ngIf="isApproved" class="example-icon" aria-hidden="false"
+      aria-label="Example delete icon">logout
+    </mat-icon>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
