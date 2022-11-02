@@ -19,7 +19,7 @@ export class ActorDetailsComponent implements OnInit {
     this.getActorDetails(this.data.actorId)
   }
 
-  getActorDetails(id: number){
+  getActorDetails(id: number): void{
     this.actorService.getActorDetails(id).subscribe(resp => {
 
       this.actorDetails = resp;
