@@ -19,16 +19,14 @@
   </mat-card>
 
 </div>
-<div class="btn-group dropdown-center">
-  <button type="button"
-  class="btn btn-primary dropdown-toggle"
-  data-bs-toggle="dropdown"
-  aria-expanded="false">Choose a Pokemon</button>
-    <ul class="dropdown-menu">
-      <app-pokemon *ngFor="let pokemon of pokeList" [pokemon]="pokemon" (getPokemonDetailsEvent)="getPokemonSelected($event)"></app-pokemon>
-    </ul>
-</div>
 
+<h4>Choose a Pokemon</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Choose an option</mat-label>
+  <select matNativeControl>
+    <app-pokemon *ngFor="let pokemon of pokeList" [pokemon]="pokemon" (getPokemonDetailsEvent)="getPokemonSelected($event)"></app-pokemon>
+  </select>
+</mat-form-field>
 
 
 

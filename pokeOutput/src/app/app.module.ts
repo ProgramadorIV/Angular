@@ -8,7 +8,6 @@ import { PokeListComponent } from './components/poke-list/poke-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PokemonComponent } from './components/pokemon/pokemon.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ImportsMaterialModule,
     HttpClientModule,
-    NgbModule,
-    BrowserAnimationsModule
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
