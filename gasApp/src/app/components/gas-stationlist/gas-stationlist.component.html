@@ -1,4 +1,8 @@
 <h3>Dirección de las estaciones:</h3>
 <div *ngFor="let gasStation of stationsList">
-  <p>{{gasStation['Dirección']}}</p>
+  <p>Nombre: {{gasStation['Rótulo']}}</p>
+  <p>Dirección: {{gasStation['Dirección']}}</p>
+  <p>Precio Gasoleo A: {{gasStation['Precio Gasoleo A']}} €</p>
+  <p>Precio Gasolina 95 E10: {{gasStation['Precio Gasolina 95 E10']}} €</p>
+  <p>Precio Hidrógeno: {{gasStation['Precio Hidrogeno']}} €</p>
 </div>
