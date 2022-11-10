@@ -9,6 +9,8 @@ import { GasStationlistService } from 'src/app/services/gas-stationlist.service'
 })
 export class GasStationlistComponent implements OnInit {
 
+  fuelType: Number = 1;
+  filteredList: GasStation [] = [];
   stationsList: GasStation [] = [];
   max: number = 0;
 
@@ -21,6 +23,7 @@ export class GasStationlistComponent implements OnInit {
   getAllStations(){
     this.stationsService.getAllStations().subscribe(resp => {
       this.stationsList = resp.ListaEESSPrecio;
+      this.filteredList = resp.ListaEESSPrecio;
     });
   }
 
@@ -32,8 +35,28 @@ export class GasStationlistComponent implements OnInit {
     return value;
   }
 
-  getValue(max: number){
-    debugger
-    console.log(max)
+  filterByValue(max: number, fuelType: Number) {
+
+    switch (Number(fuelType)) {
+      case 1:
+
+        this.filteredList = this.stationsList.filter(element => +(element['Precio Gasoleo A'].replace(",", ".")) < max
+        && element['Precio Gasoleo A'] != '');
+        break;
+
+      case 2:
+
+        this.filteredList = this.stationsList.filter(element => +(element['Precio Gasolina 98 E5'].replace(",", ".")) < max
+        && element['Precio Gasolina 98 E5'] != '');
+        break;
+
+      case 3:
+        this.filteredList = this.stationsList.filter(element => +(element['Precio Hidrogeno'].replace(",", ".")) < max
+        && element['Precio Hidrogeno'] != '');
+        break;
+
+      default:
+        break;
+    }
   }
 }
