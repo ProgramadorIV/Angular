@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GasStation, GasStationsResponse } from 'src/app/interfaces/gas-stationlist';
+import { Province } from 'src/app/interfaces/provinces';
 import { GasStationlistService } from 'src/app/services/gas-stationlist.service';
+import { ProvincesService } from 'src/app/services/provinces.service';
 
 @Component({
   selector: 'app-gas-stationlist',
@@ -12,12 +14,20 @@ export class GasStationlistComponent implements OnInit {
   fuelType: Number = 1;
   filteredList: GasStation [] = [];
   stationsList: GasStation [] = [];
+  provincesList: Province [] = [];
   max: number = 0;
 
-  constructor(private stationsService: GasStationlistService) { }
+  constructor(private stationsService: GasStationlistService, private provincesService: ProvincesService) { }
 
   ngOnInit(): void {
     this.getAllStations();
+    this.getAllProvinces();
+  }
+
+  getAllProvinces(){
+    this.provincesService.getProvinces().subscribe(resp => {
+      this.provincesList = resp;
+    })
   }
 
   getAllStations(){
