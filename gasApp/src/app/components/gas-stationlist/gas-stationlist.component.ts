@@ -4,6 +4,7 @@ import { GasStation, GasStationsResponse } from 'src/app/interfaces/gas-stationl
 import { Municipality } from 'src/app/interfaces/municipality';
 import { Province } from 'src/app/interfaces/provinces';
 import { GasStationlistService } from 'src/app/services/gas-stationlist.service';
+import { MunicipalitiesService } from 'src/app/services/municipalities.service';
 import { ProvincesService } from 'src/app/services/provinces.service';
 
 @Component({
@@ -31,33 +32,27 @@ export class GasStationlistComponent implements OnInit {
   getAllStations(){
     let provinces = this.provincesService.getProvinces();
     let stations = this.stationsService.getAllStations();
-    let municipalities = this.municipalitiesService.getAllMunicipalities();
 
-    forkJoin([provinces, stations, municipalities]).subscribe(resp => {
+    forkJoin([provinces, stations]).subscribe(resp => {
       this.provincesList = resp[0];
       this.stationsList = resp[1].ListaEESSPrecio;
       this.filteredList = resp[1].ListaEESSPrecio;
-      this.municipalitiesList = resp[2];
+      //this.municipalitiesList = resp[2];
     });
   }
 
-  filterByMunicipality(stations: GasStation []){
+  /*filterByMunicipality(stations: GasStation []){
 
     if(this.municipalitiesSelected.length)
 
-  }
+  }*/
 
   filterByProvince(stations: GasStation []){
 
     if(this.provincesSelected.length)
       this.filteredList = stations.filter(
         station => this.provincesSelected.map(provinces => provinces.IDPovincia).includes(station.IDProvincia)
-        );
-
-    else
-      this.filteredList = stations.filter(
-        station => this.provincesList.map(provinces => provinces.IDPovincia).includes(station.IDProvincia)
-        );
+      );
   }
 
   formatLabel(value: number) {

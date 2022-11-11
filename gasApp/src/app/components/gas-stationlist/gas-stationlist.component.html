@@ -1,12 +1,14 @@
 <div class="row">
   <div class="text-center row">
     <div class="mt-5 col-4">
-        <mat-label class="me-2">Select a fuel type</mat-label>
-        <select [(ngModel)]="fuelType" matNativeControl>
-          <option value= 1 selected>Gasoleo A</option>
-          <option value= 2>Gasolina 98 E5</option>
-          <option value= 3>Hidrógeno</option>
-        </select>
+      <mat-form-field appearance="fill">
+        <mat-label>Select a fuel type</mat-label>
+        <mat-select [(ngModel)]="fuelType" matNativeControl>
+          <mat-option value=1>Gasoleo A</mat-option>
+          <mat-option value=2>Gasolina 98 E5</mat-option>
+          <mat-option value=3>Hidrógeno</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="col-4 mt-3">
       <mat-slider
