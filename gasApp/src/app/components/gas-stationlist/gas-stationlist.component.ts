@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { GasStation, GasStationsResponse } from 'src/app/interfaces/gas-stationlist';
 import { Province } from 'src/app/interfaces/provinces';
 import { GasStationlistService } from 'src/app/services/gas-stationlist.service';
@@ -12,6 +13,7 @@ import { ProvincesService } from 'src/app/services/provinces.service';
 export class GasStationlistComponent implements OnInit {
 
   fuelType: Number = 1;
+  provincesSelected: Province [] = [];
   filteredList: GasStation [] = [];
   stationsList: GasStation [] = [];
   provincesList: Province [] = [];
@@ -21,20 +23,32 @@ export class GasStationlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllStations();
-    this.getAllProvinces();
-  }
-
-  getAllProvinces(){
-    this.provincesService.getProvinces().subscribe(resp => {
-      this.provincesList = resp;
-    })
   }
 
   getAllStations(){
-    this.stationsService.getAllStations().subscribe(resp => {
-      this.stationsList = resp.ListaEESSPrecio;
-      this.filteredList = resp.ListaEESSPrecio;
+    let provinces = this.provincesService.getProvinces();
+    let stations = this.stationsService.getAllStations();
+
+    forkJoin([provinces, stations]).subscribe(resp => {
+      this.provincesList = resp[0];
+      this.provincesSelected = resp[0];
+      this.stationsList = resp[1].ListaEESSPrecio;
+      this.filteredList = resp[1].ListaEESSPrecio;
     });
+  }
+
+  filterByProvince(stations: GasStation []){
+
+    if(this.filteredList.length)
+      this.filteredList = stations.filter(station => this.getFilteredProvinces().includes(station.Provincia));
+  }
+
+  getFilteredProvinces(): String []{
+    let provincesId: string [] = []
+    this.provincesSelected.forEach(province => {
+      provincesId.push(String(province));
+    })
+    return provincesId;
   }
 
   formatLabel(value: number) {
@@ -50,19 +64,39 @@ export class GasStationlistComponent implements OnInit {
     switch (Number(fuelType)) {
       case 1:
 
-        this.filteredList = this.stationsList.filter(element => +(element['Precio Gasoleo A'].replace(",", ".")) < max
-        && element['Precio Gasoleo A'] != '');
+        if(max==0){
+          this.filteredList=this.stationsList.filter(element => element['Precio Gasoleo A'] != '');
+        }
+        else{
+          this.filteredList = this.stationsList.filter(element => +(element['Precio Gasoleo A'].replace(",", ".")) < max
+          && element['Precio Gasoleo A'] != '');
+        }
+
+        this.filterByProvince(this.filteredList);
         break;
 
       case 2:
 
-        this.filteredList = this.stationsList.filter(element => +(element['Precio Gasolina 98 E5'].replace(",", ".")) < max
-        && element['Precio Gasolina 98 E5'] != '');
+        if(max==0){
+          this.filteredList = this.stationsList.filter(element => element['Precio Gasolina 98 E5'] != '')
+        }
+        else{
+          this.filteredList = this.stationsList.filter(element => +(element['Precio Gasolina 98 E5'].replace(",", ".")) < max
+          && element['Precio Gasolina 98 E5'] != '');
+        }
+        this.filterByProvince(this.filteredList);
         break;
 
       case 3:
-        this.filteredList = this.stationsList.filter(element => +(element['Precio Hidrogeno'].replace(",", ".")) < max
-        && element['Precio Hidrogeno'] != '');
+
+        if(max== 0){
+          this.filteredList = this.stationsList.filter(element => element['Precio Hidrogeno'] != '');
+        }
+        else{
+          this.filteredList = this.stationsList.filter(element => +(element['Precio Hidrogeno'].replace(",", ".")) < max
+          && element['Precio Hidrogeno'] != '');
+        }
+        this.filterByProvince(this.filteredList);
         break;
 
       default:

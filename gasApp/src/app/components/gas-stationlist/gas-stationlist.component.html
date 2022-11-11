@@ -1,52 +1,63 @@
-<div class="text-center">
-  <div class="w-100 mt-5">
-      <h4 class="mb-4">Select a fuel type</h4>
-      <mat-label class="me-2">Choose an option</mat-label>
-      <select [(ngModel)]="fuelType" matNativeControl>
-        <option value= 1 selected>Gasoleo A</option>
-        <option value= 2>Gasolina 98 E5</option>
-        <option value= 3>Hidrógeno</option>
-      </select>
-  </div>
-  <div class="w-100 mt-3">
-    <mat-slider
-      class="mt-3 w-25"
-      thumbLabel
-      [displayWith]="formatLabel"
-      tickInterval="2"
-      step="0.01"
-      min="1.5"
-      max="2.4"
-      aria-label="units"
-      [(ngModel)]="max"
-    ></mat-slider>
-    <div class="w-100">
-      <button
-        class="btn btn-outline-success"
-        (click)="filterByValue(max, fuelType)"
-      >
-        Filtrar
-      </button>
+<div class="row">
+  <div class="text-center row">
+    <div class="mt-5 col-4">
+        <mat-label class="me-2">Select a fuel type</mat-label>
+        <select [(ngModel)]="fuelType" matNativeControl>
+          <option value= 1 selected>Gasoleo A</option>
+          <option value= 2>Gasolina 98 E5</option>
+          <option value= 3>Hidrógeno</option>
+        </select>
+    </div>
+    <div class="col-4 mt-3">
+      <mat-slider
+        class="mt-3 w-100"
+        thumbLabel
+        [displayWith]="formatLabel"
+        tickInterval="2"
+        step="0.005"
+        min="1.5"
+        max="2.4"
+        aria-label="units"
+        [(ngModel)]="max"
+      ></mat-slider>
+      <div class="w-100">
+        <button
+          class="btn btn-outline-success"
+          (click)="filterByValue(max, fuelType)"
+        >
+          Filtrar
+        </button>
+      </div>
+    </div>
+    <div class="col-4 mt-5">
+        <mat-form-field appearance="fill">
+          <mat-label>Select desired provinces</mat-label>
+          <mat-select [(ngModel)]="provincesSelected" multiple>
+            <mat-option *ngFor="let province of provincesList" [value]="province.Provincia">{{province.Provincia}}</mat-option>
+          </mat-select>
+        </mat-form-field>
     </div>
   </div>
+
+  <div class="w-100" *ngIf="filteredList.length else noStations">
+    <h3>Estaciones:</h3>
+    <div *ngFor="let gasStation of filteredList" class="mt-5">
+      <p>Nombre: {{ gasStation["Rótulo"] }}</p>
+      <p>Dirección: {{ gasStation["Dirección"] }}</p>
+      <p>Precio Gasoleo A: {{ gasStation["Precio Gasoleo A"] }} €</p>
+      <p>Precio Gasolina 98 E5: {{ gasStation["Precio Gasolina 98 E5"] }} €</p>
+      <p>Precio Hidrógeno: {{ gasStation["Precio Hidrogeno"] }} €</p>
+      <p>Provincia: {{gasStation["Provincia"]}}</p>
+      -------------------------------------------------------------
+    </div>
+  </div>
+
+  <ng-template #noStations>
+    <div class="mt-5 pt-2 text-center">
+      <img width="50%" src="https://lh3.googleusercontent.com/a-/ACNPEu9ZPkKdJUzx83WRZkjlSUmpKJ7w2eFU6p5r4Pb2WQ=s75-c" alt="No hay gasolineras">
+    </div>
+  </ng-template>
 </div>
 
-<div class="w-100" *ngIf="filteredList.length else noStations">
-  <h3>Estaciones:</h3>
-  <div *ngFor="let gasStation of filteredList" class="mt-5">
-    <p>Nombre: {{ gasStation["Rótulo"] }}</p>
-    <p>Dirección: {{ gasStation["Dirección"] }}</p>
-    <p>Precio Gasoleo A: {{ gasStation["Precio Gasoleo A"] }} €</p>
-    <p>Precio Gasolina 98 E5: {{ gasStation["Precio Gasolina 98 E5"] }} €</p>
-    <p>Precio Hidrógeno: {{ gasStation["Precio Hidrogeno"] }} €</p>
-    -------------------------------------------------------------
-  </div>
-</div>
-
-<ng-template #noStations>
-  <div class="mt-5 pt-2 text-center">
-    <img width="50%" src="https://lh3.googleusercontent.com/a-/ACNPEu9ZPkKdJUzx83WRZkjlSUmpKJ7w2eFU6p5r4Pb2WQ=s75-c" alt="No hay gasolineras">
-  </div>
-</ng-template>
 
 
