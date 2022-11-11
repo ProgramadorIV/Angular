@@ -33,7 +33,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Select desired provinces</mat-label>
           <mat-select [(ngModel)]="provincesSelected" multiple>
-            <mat-option *ngFor="let province of provincesList" [value]="province.Provincia">{{province.Provincia}}</mat-option>
+            <mat-option *ngFor="let province of provincesList" [value]="province">{{province.Provincia}}</mat-option>
           </mat-select>
         </mat-form-field>
     </div>

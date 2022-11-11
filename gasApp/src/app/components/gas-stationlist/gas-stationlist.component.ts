@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { GasStation, GasStationsResponse } from 'src/app/interfaces/gas-stationlist';
+import { Municipality } from 'src/app/interfaces/municipality';
 import { Province } from 'src/app/interfaces/provinces';
 import { GasStationlistService } from 'src/app/services/gas-stationlist.service';
 import { ProvincesService } from 'src/app/services/provinces.service';
@@ -13,13 +14,15 @@ import { ProvincesService } from 'src/app/services/provinces.service';
 export class GasStationlistComponent implements OnInit {
 
   fuelType: Number = 1;
-  provincesSelected: Province [] = [];
+  municipalitiesList: Municipality [] = [];
+  municipalitiesSelected: Municipality [] = [];
   filteredList: GasStation [] = [];
   stationsList: GasStation [] = [];
   provincesList: Province [] = [];
+  provincesSelected: Province [] = [];
   max: number = 0;
 
-  constructor(private stationsService: GasStationlistService, private provincesService: ProvincesService) { }
+  constructor(private stationsService: GasStationlistService, private provincesService: ProvincesService, private municipalitiesService: MunicipalitiesService) { }
 
   ngOnInit(): void {
     this.getAllStations();
@@ -28,27 +31,33 @@ export class GasStationlistComponent implements OnInit {
   getAllStations(){
     let provinces = this.provincesService.getProvinces();
     let stations = this.stationsService.getAllStations();
+    let municipalities = this.municipalitiesService.getAllMunicipalities();
 
-    forkJoin([provinces, stations]).subscribe(resp => {
+    forkJoin([provinces, stations, municipalities]).subscribe(resp => {
       this.provincesList = resp[0];
-      this.provincesSelected = resp[0];
       this.stationsList = resp[1].ListaEESSPrecio;
       this.filteredList = resp[1].ListaEESSPrecio;
+      this.municipalitiesList = resp[2];
     });
+  }
+
+  filterByMunicipality(stations: GasStation []){
+
+    if(this.municipalitiesSelected.length)
+
   }
 
   filterByProvince(stations: GasStation []){
 
-    if(this.filteredList.length)
-      this.filteredList = stations.filter(station => this.getFilteredProvinces().includes(station.Provincia));
-  }
+    if(this.provincesSelected.length)
+      this.filteredList = stations.filter(
+        station => this.provincesSelected.map(provinces => provinces.IDPovincia).includes(station.IDProvincia)
+        );
 
-  getFilteredProvinces(): String []{
-    let provincesId: string [] = []
-    this.provincesSelected.forEach(province => {
-      provincesId.push(String(province));
-    })
-    return provincesId;
+    else
+      this.filteredList = stations.filter(
+        station => this.provincesList.map(provinces => provinces.IDPovincia).includes(station.IDProvincia)
+        );
   }
 
   formatLabel(value: number) {
