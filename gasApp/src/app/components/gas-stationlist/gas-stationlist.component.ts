@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { forkJoin, map, Observable, startWith } from 'rxjs';
 import { GasStation, GasStationsResponse } from 'src/app/interfaces/gas-stationlist';
 import { Municipality } from 'src/app/interfaces/municipality';
 import { Province } from 'src/app/interfaces/provinces';
@@ -14,6 +15,7 @@ import { ProvincesService } from 'src/app/services/provinces.service';
 })
 export class GasStationlistComponent implements OnInit {
 
+  myControl = new FormControl('');
   fuelType: Number = 1;
   municipalitiesList: Municipality [] = [];
   municipalitiesSelected: Municipality [] = [];
@@ -22,11 +24,57 @@ export class GasStationlistComponent implements OnInit {
   provincesList: Province [] = [];
   provincesSelected: Province [] = [];
   max: number = 0;
+  filteredOptions!: Observable<Municipality[]>;
 
-  constructor(private stationsService: GasStationlistService, private provincesService: ProvincesService, private municipalitiesService: MunicipalitiesService) { }
+  constructor(
+    private stationsService: GasStationlistService,
+    private provincesService: ProvincesService,
+    private municipalitiesService: MunicipalitiesService
+    ) { }
 
   ngOnInit(): void {
     this.getAllStations();
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(String(value)))
+    );
+  }
+
+  getAllMunicipalities(provincesSelected: Province []){
+
+    if(provincesSelected.length){
+      provincesSelected.forEach(province => {
+        this.municipalitiesService.getMunicipalitiesByProvince(province.Provincia).subscribe(resp => {
+          this.municipalitiesList.concat(resp);
+        });
+      });
+    }
+    else{
+      this.provincesList.forEach(province => {
+        this.municipalitiesService.getMunicipalitiesByProvince(province.Provincia).subscribe(resp => {
+          this.municipalitiesList.concat(resp);
+        });
+      })
+    }
+  }
+
+  private _filter(value: String): Municipality[]{
+    const filterValue = value.toLowerCase();
+    if(this.municipalitiesList.length){
+      return this.municipalitiesList.filter(municipality =>
+        municipality.Municipio.toLowerCase().includes(filterValue)
+        );
+    }
+    else{
+      this.getAllMunicipalities(this.provincesSelected);
+      return this.municipalitiesList;
+    }
+
+
+  }
+
+  displayFn(subject: Municipality){
+    return subject.Municipio
   }
 
   getAllStations(){
