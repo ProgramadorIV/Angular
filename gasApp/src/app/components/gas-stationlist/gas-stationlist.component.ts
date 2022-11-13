@@ -18,7 +18,7 @@ export class GasStationlistComponent implements OnInit {
   myControl = new FormControl('');
   fuelType: Number = 1;
   municipalitiesList: Municipality [] = [];
-  municipalitiesSelected: Municipality [] = [];
+  municipalitySelected: Municipality | undefined;
   filteredList: GasStation [] = [];
   stationsList: GasStation [] = [];
   provincesList: Province [] = [];
@@ -42,20 +42,31 @@ export class GasStationlistComponent implements OnInit {
 
   getAllMunicipalities(provincesSelected: Province []){
 
-    if(provincesSelected.length){
-      provincesSelected.forEach(province => {
-        this.municipalitiesService.getMunicipalitiesByProvince(province.Provincia).subscribe(resp => {
-          this.municipalitiesList.concat(resp);
+    debugger
+      this.municipalitiesList = [];
+      if(provincesSelected.length){
+        provincesSelected.forEach(province => {
+          this.municipalitiesService.getMunicipalitiesByProvince(province.IDPovincia).subscribe(resp => {
+
+            this.municipalitiesList = this.municipalitiesList.concat(resp).sort((a,b) =>
+            a.Municipio.toLowerCase() > b.Municipio.toLowerCase() ? 1 : -1
+            );
+
+          });
         });
-      });
-    }
-    else{
-      this.provincesList.forEach(province => {
-        this.municipalitiesService.getMunicipalitiesByProvince(province.Provincia).subscribe(resp => {
-          this.municipalitiesList.concat(resp);
-        });
-      })
-    }
+        console.log(this.municipalitiesList)
+      }
+      else{
+        this.provincesList.forEach(province => {
+          this.municipalitiesService.getMunicipalitiesByProvince(province.IDPovincia).subscribe(resp => {
+
+            this.municipalitiesList = this.municipalitiesList.concat(resp).sort((a,b) =>
+            a.Municipio.toLowerCase() > b.Municipio.toLowerCase() ? 1 : -1
+            );
+          });
+        })
+        console.log(this.municipalitiesList)
+      }
   }
 
   private _filter(value: String): Municipality[]{
@@ -66,7 +77,7 @@ export class GasStationlistComponent implements OnInit {
         );
     }
     else{
-      this.getAllMunicipalities(this.provincesSelected);
+      this.getAllMunicipalities(this.provincesList);
       return this.municipalitiesList;
     }
 
@@ -89,11 +100,14 @@ export class GasStationlistComponent implements OnInit {
     });
   }
 
-  /*filterByMunicipality(stations: GasStation []){
+  filterByMunicipality(stations: GasStation []){
 
-    if(this.municipalitiesSelected.length)
+    if(this.municipalitySelected?.Municipio != undefined)
+      this.filteredList = stations.filter(
+        station => station.IDMunicipio == this.municipalitySelected?.IDMunicipio
+      );
 
-  }*/
+  }
 
   filterByProvince(stations: GasStation []){
 
@@ -124,7 +138,9 @@ export class GasStationlistComponent implements OnInit {
           && element['Precio Gasoleo A'] != '');
         }
 
+        debugger
         this.filterByProvince(this.filteredList);
+        this.filterByMunicipality(this.filteredList)
         break;
 
       case 2:
@@ -137,6 +153,7 @@ export class GasStationlistComponent implements OnInit {
           && element['Precio Gasolina 98 E5'] != '');
         }
         this.filterByProvince(this.filteredList);
+        this.filterByMunicipality(this.filteredList)
         break;
 
       case 3:
@@ -149,6 +166,7 @@ export class GasStationlistComponent implements OnInit {
           && element['Precio Hidrogeno'] != '');
         }
         this.filterByProvince(this.filteredList);
+        this.filterByMunicipality(this.filteredList)
         break;
 
       default:
