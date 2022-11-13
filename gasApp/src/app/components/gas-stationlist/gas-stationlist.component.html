@@ -38,6 +38,19 @@
             <mat-option *ngFor="let province of provincesList" [value]="province">{{province.Provincia}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <!--<a routerLink="/municipalities">Filtrar por municipios</a>-->
+
+        <form class="m-3">
+          <mat-form-field appearance="fill">
+            Select
+            <input (click)="getAllMunicipalities(provincesSelected)" class="text-dark" type="text" matInput [matAutocomplete]="auto" [formControl]="myControl" />
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let municipality of filteredOptions | async" [value]="municipality">
+                {{municipality}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
     </div>
   </div>
 
