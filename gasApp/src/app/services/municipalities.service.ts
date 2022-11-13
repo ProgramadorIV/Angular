@@ -15,6 +15,37 @@ export class MunicipalitiesService {
 
   constructor(private http: HttpClient) { }
 
+getMunicipalitiesByProvince(provinceId: String): Observable<Municipality []>{
+    return this.http.get<Municipality[]>(`https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/MunicipiosPorProvincia/${provinceId}`)
+  }
+
+
+/*
+  getMunicipalitiesByProvince(provinceId: String): Observable<Municipality []>{
+    return this.http.get<Municipality[]>(
+      `https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/MunicipiosPorProvincia/${provinceId}`,
+      {
+        responseType: 'text'
+      }
+      ).pipe(switchMap(async (xml) => await this.parseXmlToJson(xml)))
+  }
+  async parseXmlToJson(xml: string) {
+    // With parser
+     const parser = new xml2js.Parser({ explicitArray: false });
+    parser
+      .parseStringPromise(xml)
+      .then(function(result) {
+        console.log(result);
+        console.log("Done");
+      })
+      .catch(function(err) {
+        // Failed
+      });
+
+    // Without parser
+    return await xml2js
+      .parseStringPromise(xml, { explicitArray: false })
+  }
 /*
 
   getAllMunicipalities(provinceId: string){
@@ -47,7 +78,6 @@ export class MunicipalitiesService {
 
 
 */
-
 
 
 }
