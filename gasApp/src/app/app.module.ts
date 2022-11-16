@@ -14,17 +14,22 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MunicipalitiesComponent } from './components/municipalities/municipalities.component';
+import { MapComponent } from './components/map/map.component';
+import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
     AppComponent,
     GasStationlistComponent,
-    MunicipalitiesComponent
+    MunicipalitiesComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     NgbModule,
     BrowserAnimationsModule,
     MatSliderModule,
@@ -33,7 +38,8 @@ import { MunicipalitiesComponent } from './components/municipalities/municipalit
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleMapsModule
 
   ],
   providers: [],
