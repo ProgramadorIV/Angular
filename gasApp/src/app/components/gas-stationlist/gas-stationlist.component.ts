@@ -42,7 +42,6 @@ export class GasStationlistComponent implements OnInit {
 
   getAllMunicipalities(provincesSelected: Province []){
 
-    debugger
       this.municipalitiesList = [];
       if(provincesSelected.length){
         provincesSelected.forEach(province => {

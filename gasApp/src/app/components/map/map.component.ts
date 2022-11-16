@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { GasStation } from 'src/app/interfaces/gas-stationlist';
 import { MapService } from 'src/app/services/map-service.service';
 
 @Component({
@@ -8,19 +10,29 @@ import { MapService } from 'src/app/services/map-service.service';
 })
 export class MapComponent implements OnInit {
 
-  currentLng: number = 0;
-  currentLat: number = 0;
+  @Input () gasStationList: GasStation [] = [];
+  stationsCoords: Map<GasStation, google.maps.LatLngLiteral> = new Map();
+  center: google.maps.LatLngLiteral = {lat: 0,lng: 0};
+  currentUbication = new google.maps.Marker({
+    position: this.center,
+    icon: 'https://cdn-icons-png.flaticon.com/512/535/535188.png'
+  });
   constructor(private mapService: MapService) { }
 
   ngOnInit(): void {
     this.mapService.getLocation().then(resp=> {
-      this.currentLng = resp.lng;
-      this.currentLat = resp.lat;
-    })
+      this.center = {lat: resp.lat, lng: resp.lng}
+    });
+  }
+
+  generateCoords(station: GasStation){
+
+    let coords: google.maps.LatLngLiteral;
+    return coords = {lat: +station['Latitud'].replace(',', '.'), lng: +station['Longitud (WGS84)'].replace(',', '.')}
   }
 
 
 
-
-
 }
+
+
