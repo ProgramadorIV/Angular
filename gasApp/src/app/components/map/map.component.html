@@ -1,5 +1,22 @@
-<google-map [center]="center" width="100%" height="700px" [zoom]="7">
-  <map-marker [position]="center" [icon]="'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'"></map-marker>
-  <map-marker *ngFor="let gasStation of gasStationList" [position]="generateCoords(gasStation)">
-  </map-marker>
+<google-map [center]="center" width="100%" height="700px" [zoom]="7" [mapTypeId]="mapType">
+  <map-marker #marker="mapMarker" [position]="center" [icon]="'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'" (mapClick)="openInfoWindow(marker, infoWindow)"></map-marker>
+  <map-info-window #infoWindow="mapInfoWindow">
+    <div class="text-center">
+      <img src="../../../assets/Miguel.png" alt="Usuario Miguel">
+    </div>
+  </map-info-window>
+  <ng-container *ngFor="let gasStation of gasStationList">
+    <map-marker #marker="mapMarker" [position]="generateCoords(gasStation)" (mapClick)="openInfoWindow(marker, infoWindow)"></map-marker>
+    <map-info-window #infoWindow="mapInfoWindow">
+      <div class="w-100">
+        <h5>{{ gasStation["Rótulo"] }}</h5>
+        <p>Dirección: {{ gasStation["Dirección"] }}</p>
+        <P>Horario: {{gasStation['Horario']}}</P>
+        <p>Precio Gasoleo A: {{ gasStation["Precio Gasoleo A"] }} €</p>
+        <p>Precio Gasolina 98 E5: {{ gasStation["Precio Gasolina 98 E5"] }} €</p>
+        <p>Precio Hidrógeno: {{ gasStation["Precio Hidrogeno"] }} €</p>
+        <p>Provincia: {{gasStation["Provincia"]}}</p>
+      </div>
+    </map-info-window>
+  </ng-container>
 </google-map>

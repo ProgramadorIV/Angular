@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row w-100 justify-content-center">
   <div class="text-center row">
     <div class="mt-5 col-4">
       <mat-form-field appearance="fill">
@@ -54,9 +54,8 @@
       </button>
     </div>
   </div>
-  <div class="w-100">
-    <app-map *ngIf="filteredList.length" [gasStationList]="filteredList"></app-map>
-    <app-map *ngIf="!filteredList.length" [gasStationList]="stationsList"></app-map>
+  <div class="w-50 my-5">
+    <app-map [gasStationList]="filteredList"></app-map>
   </div>
   <div class="w-100" *ngIf="filteredList.length else noStations">
     <h3>Estaciones:</h3>

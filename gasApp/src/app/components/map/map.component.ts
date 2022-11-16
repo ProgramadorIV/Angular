@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { MapType } from '@angular/compiler';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { GasStation } from 'src/app/interfaces/gas-stationlist';
 import { MapService } from 'src/app/services/map-service.service';
@@ -10,7 +11,10 @@ import { MapService } from 'src/app/services/map-service.service';
 })
 export class MapComponent implements OnInit {
 
+  @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow = {} as MapInfoWindow;
   @Input () gasStationList: GasStation [] = [];
+
+  mapType = google.maps.MapTypeId.HYBRID;
   stationsCoords: Map<GasStation, google.maps.LatLngLiteral> = new Map();
   center: google.maps.LatLngLiteral = {lat: 0,lng: 0};
   currentUbication = new google.maps.Marker({
@@ -29,6 +33,10 @@ export class MapComponent implements OnInit {
 
     let coords: google.maps.LatLngLiteral;
     return coords = {lat: +station['Latitud'].replace(',', '.'), lng: +station['Longitud (WGS84)'].replace(',', '.')}
+  }
+
+  openInfoWindow(marker: MapMarker, infoWindow: MapInfoWindow){
+    infoWindow.open(marker);
   }
 
 
